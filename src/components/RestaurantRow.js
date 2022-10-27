@@ -1,15 +1,8 @@
 /* eslint-disable react-native/no-inline-styles */
-/* eslint-disable react/react-in-jsx-scope */
-import {useState} from 'react';
+import React from 'react';
 import {View, Text, StyleSheet, TouchableHighlight} from 'react-native';
 import Stars from 'components/Stars';
-const RestaurantRow = ({restaurant, index}) => {
-  const [showInfo, setShowInfo] = useState(false);
-
-  const infoPressed = () => {
-    setShowInfo(!showInfo);
-  };
-
+const RestaurantRow = ({restaurant, index, navigation}) => {
   return (
     <View
       key={restaurant.name}
@@ -24,19 +17,15 @@ const RestaurantRow = ({restaurant, index}) => {
         </View>
         <View style={styles.edges}>
           <TouchableHighlight
-            onPress={infoPressed}
+            onPress={() =>
+              navigation.navigate('Restaurant Info', {restaurant: restaurant})
+            }
             style={styles.button}
             underlayColor="#5398DC">
             <Text style={styles.buttonText}>Info</Text>
           </TouchableHighlight>
         </View>
       </View>
-
-      {showInfo && (
-        <View style={styles.info}>
-          <Text>Restaurant Info</Text>
-        </View>
-      )}
     </View>
   );
 };

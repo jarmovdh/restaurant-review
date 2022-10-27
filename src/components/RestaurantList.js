@@ -2,10 +2,11 @@
 import React, {useState, useEffect} from 'react';
 import {View, StyleSheet, TextInput, FlatList, Image} from 'react-native';
 import Header from 'components/Header';
+
 import RestaurantRow from 'components/RestaurantRow';
 import PizzaImage from 'images/pizza.png';
 
-const RestaurantList = () => {
+const RestaurantList = ({navigation}) => {
   const [searchQuery, setSearchQuery] = useState(null);
   const [restaurants, setRestaurants] = useState([]);
 
@@ -19,7 +20,7 @@ const RestaurantList = () => {
 
   return (
     <>
-      <View style={{flex: 1}}>
+      <View style={{flex: 1, backgroundColor: '#fff'}}>
         <View style={{marginTop: 50, alignItems: 'center'}}>
           <Image source={PizzaImage} />
         </View>
@@ -42,7 +43,11 @@ const RestaurantList = () => {
             );
           })}
           renderItem={({item, index}) => (
-            <RestaurantRow restaurant={item} index={index} />
+            <RestaurantRow
+              restaurant={item}
+              index={index}
+              navigation={navigation}
+            />
           )}
           keyExtractor={item => item.name}
           initialNumToRender={21}
