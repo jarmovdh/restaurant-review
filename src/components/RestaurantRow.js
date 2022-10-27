@@ -2,7 +2,7 @@
 /* eslint-disable react/react-in-jsx-scope */
 import {useState} from 'react';
 import {View, Text, StyleSheet, TouchableHighlight} from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import Stars from 'components/Stars';
 const RestaurantRow = ({restaurant, index}) => {
   const [showInfo, setShowInfo] = useState(false);
 
@@ -16,11 +16,7 @@ const RestaurantRow = ({restaurant, index}) => {
       style={[{backgroundColor: index % 2 === 0 ? 'white' : '#F3F3F7'}]}>
       <View style={styles.row}>
         <View style={styles.stars}>
-          <Icon name="star" color="#FFD64C" />
-          <Icon name="star" color="#FFD64C" />
-          <Icon name="star" color="#FFD64C" />
-          <Icon name="star" color="#FFD64C" />
-          <Icon name="star-half" color="#FFD64C" />
+          <Stars rating={restaurant.rating} />
         </View>
         <View style={styles.nameAddress}>
           <Text>{restaurant.name}</Text>
