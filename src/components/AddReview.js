@@ -12,6 +12,7 @@ import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scrollview';
 
 const AddReview = ({navigation}) => {
   const [name, setName] = useState('');
+  const [comment, setComment] = useState('');
   const [review, setReview] = useState('');
 
   return (
@@ -49,8 +50,8 @@ const AddReview = ({navigation}) => {
         <TextInput
           style={[styles.input, {height: 100}]}
           placeholder="Review"
-          value={review}
-          onChangeText={() => setReview({review})}
+          value={comment}
+          onChangeText={() => setComment({comment})}
           multiline={true}
           numberOfline={5}
         />
