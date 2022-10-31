@@ -7,6 +7,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 import RestaurantList from 'components/RestaurantList';
 import RestaurantInfo from 'components/RestaurantInfo';
+import AddReview from 'components/AddReview';
 import About from 'components/About';
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -30,6 +31,14 @@ function HomeStackScreen() {
           },
         }}
       />
+      <Stack.Screen
+        name="Modal"
+        component={AddReview}
+        options={{
+          headerShown: false,
+          presentation: 'modal',
+        }}
+      />
     </Stack.Navigator>
   );
 }
@@ -38,8 +47,8 @@ const App = () => {
   return (
     <NavigationContainer>
       <Tab.Navigator
-        tabBarOptions={{
-          activeBackgroundColor: '#E6F0FA',
+        screenOptions={{
+          tabBarActiveBackgroundColor: '#E6F0FA',
         }}>
         <Tab.Screen
           name="List"
@@ -48,6 +57,7 @@ const App = () => {
             tabBarIcon: ({color}) => (
               <Icon color={color} name="list" size={20} />
             ),
+            headerShown: false,
           }}
         />
         <Tab.Screen

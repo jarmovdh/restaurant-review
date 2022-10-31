@@ -12,7 +12,7 @@ const RestaurantList = ({navigation}) => {
 
   useEffect(() => {
     fetch(
-      'https://my-json-server.typicode.com/markbolier/restaurant-review/restaurants',
+      'https://my-json-server.typicode.com/jarmovdh/restaurant-review/restaurants',
     )
       .then(response => response.json())
       .then(result => setRestaurants(result));
