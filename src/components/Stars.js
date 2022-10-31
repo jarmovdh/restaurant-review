@@ -1,8 +1,7 @@
 /* eslint-disable react-native/no-inline-styles */
-/* eslint-disable react/react-in-jsx-scope */
 import React from 'react';
 import {View} from 'react-native';
-import {Icon} from 'react-native-vector-icons/FontAwesome';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 const Stars = ({rating}) => {
   const stars = [...Array(Math.ceil(rating))];

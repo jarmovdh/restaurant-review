@@ -1,68 +1,67 @@
-/* eslint-disable react-native/no-inline-styles */
-import React, {useState, useEffect} from 'react';
-import {View, StyleSheet, TextInput, FlatList, Image} from 'react-native';
+import React from 'react';
 
-import Header from 'components/Header';
-import RestaurantRow from 'components/RestaurantRow';
-import PizzaImage from 'images/pizza.png';
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import Icon from 'react-native-vector-icons/FontAwesome';
+
+import RestaurantList from 'components/RestaurantList';
+import RestaurantInfo from 'components/RestaurantInfo';
+import About from 'components/About';
+const Stack = createNativeStackNavigator();
+const Tab = createBottomTabNavigator();
+
+function HomeStackScreen() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="Home"
+        component={RestaurantList}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="Restaurant Info"
+        component={RestaurantInfo}
+        options={{
+          headerStyle: {backgroundColor: '#0066CC', color: '#FFF'},
+          headerTintColor: '#FFF',
+          headerTitleStyle: {
+            color: '#FFF',
+          },
+        }}
+      />
+    </Stack.Navigator>
+  );
+}
 
 const App = () => {
-  const [searchQuery, setSearchQuery] = useState(null);
-  const [restaurants, setRestaurants] = useState([]);
-
-  useEffect(() => {
-    fetch(
-      'https://my-json-server.typicode.com/markbolier/restaurant-review/restaurants',
-    )
-      .then(response => response.json())
-      .then(result => setRestaurants(result));
-  }, []);
-
   return (
-    <>
-      <View style={{flex: 1}}>
-        <View style={{marginTop: 50, alignItems: 'center'}}>
-          <Image source={PizzaImage} />
-        </View>
-        <Header />
-        <TextInput
-          style={styles.input}
-          placeholder="Live search"
-          onChangeText={text => {
-            setSearchQuery(text);
+    <NavigationContainer>
+      <Tab.Navigator
+        tabBarOptions={{
+          activeBackgroundColor: '#E6F0FA',
+        }}>
+        <Tab.Screen
+          name="List"
+          component={HomeStackScreen}
+          options={{
+            tabBarIcon: ({color}) => (
+              <Icon color={color} name="list" size={20} />
+            ),
           }}
-          value={useState(searchQuery)}
         />
-
-        <FlatList
-          data={restaurants.filter(restaurant => {
-            return (
-              !searchQuery ||
-              restaurant.name.toLowerCase().indexOf(searchQuery.toLowerCase()) >
-                -1
-            );
-          })}
-          renderItem={({item, index}) => (
-            <RestaurantRow restaurant={item} index={index} />
-          )}
-          keyExtractor={item => item.name}
-          initialNumToRender={21}
+        <Tab.Screen
+          name="About"
+          component={About}
+          options={{
+            tabBarIcon: ({color}) => (
+              <Icon color={color} name="info-circle" size={20} />
+            ),
+          }}
         />
-      </View>
-    </>
+      </Tab.Navigator>
+    </NavigationContainer>
   );
 };
-
-const styles = StyleSheet.create({
-  input: {
-    padding: 10,
-    paddingHorizontal: 20,
-    fontSize: 16,
-    color: '#444',
-    borderBottomWidth: 1,
-    borderColor: '#ddd',
-    backgroundColor: '#F5F5F5',
-  },
-});
 
 export default App;

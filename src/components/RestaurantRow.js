@@ -1,26 +1,15 @@
 /* eslint-disable react-native/no-inline-styles */
-/* eslint-disable react/react-in-jsx-scope */
-import {useState} from 'react';
+import React from 'react';
 import {View, Text, StyleSheet, TouchableHighlight} from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
-const RestaurantRow = ({restaurant, index}) => {
-  const [showInfo, setShowInfo] = useState(false);
-
-  const infoPressed = () => {
-    setShowInfo(!showInfo);
-  };
-
+import Stars from 'components/Stars';
+const RestaurantRow = ({restaurant, index, navigation}) => {
   return (
     <View
       key={restaurant.name}
       style={[{backgroundColor: index % 2 === 0 ? 'white' : '#F3F3F7'}]}>
       <View style={styles.row}>
         <View style={styles.stars}>
-          <Icon name="star" color="#FFD64C" />
-          <Icon name="star" color="#FFD64C" />
-          <Icon name="star" color="#FFD64C" />
-          <Icon name="star" color="#FFD64C" />
-          <Icon name="star-half" color="#FFD64C" />
+          <Stars rating={restaurant.rating} />
         </View>
         <View style={styles.nameAddress}>
           <Text>{restaurant.name}</Text>
@@ -28,19 +17,15 @@ const RestaurantRow = ({restaurant, index}) => {
         </View>
         <View style={styles.edges}>
           <TouchableHighlight
-            onPress={infoPressed}
+            onPress={() =>
+              navigation.navigate('Restaurant Info', {restaurant: restaurant})
+            }
             style={styles.button}
             underlayColor="#5398DC">
             <Text style={styles.buttonText}>Info</Text>
           </TouchableHighlight>
         </View>
       </View>
-
-      {showInfo && (
-        <View style={styles.info}>
-          <Text>Restaurant Info</Text>
-        </View>
-      )}
     </View>
   );
 };
