@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import Stars from 'components/Stars';
 
-const RestaurantInfo = ({route}) => {
+const RestaurantInfo = ({route, navigation}) => {
   const restaurant = route.params.restaurant;
 
   return (
@@ -19,7 +19,9 @@ const RestaurantInfo = ({route}) => {
           <Text style={styles.name}>{restaurant.name}</Text>
           <Text style={styles.address}>{restaurant.address}</Text>
           <Stars rating={restaurant.rating} />
-          <TouchableOpacity style={styles.button}>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => navigation.navigate('Modal')}>
             <Text style={styles.buttonText}>Add Review</Text>
           </TouchableOpacity>
         </View>
