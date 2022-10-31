@@ -9,11 +9,22 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scrollview';
+// const url = 'https://my-json-server.typicode.com/jarmovdh/restaurant-review/';
 
 const AddReview = ({navigation}) => {
   const [name, setName] = useState('');
   const [comment, setComment] = useState('');
   const [review, setReview] = useState('');
+
+  // const handleSubmit = async e => {
+  //   e.preventDefault();
+  //   try {
+  //     const resp = await axios.post(url, {name, comment, review});
+  //     console.log(resp.data);
+  //   } catch (error) {
+  //     console.log(error.response);
+  //   }
+  // };
 
   return (
     <KeyboardAwareScrollView style={{flex: 1, backgroundColor: '#FFF'}}>
@@ -56,7 +67,9 @@ const AddReview = ({navigation}) => {
           numberOfline={5}
         />
 
-        <TouchableOpacity style={styles.submitButton}>
+        <TouchableOpacity
+          style={styles.submitButton}
+          onPress={() => navigation.goBack()}>
           <Text style={styles.submitButtonText}>Submit Review</Text>
         </TouchableOpacity>
       </View>
